@@ -29,6 +29,7 @@ int main()
 	int now = 99999999;
 	for (int i = n - 1; i >= 0; i--) {
 		if ((l[i] == t) && (a[i] < now)) {
+		//l[i]==t is NOT necessary
 			t--;
 			now = a[i];
 			p[t] = a[i];
