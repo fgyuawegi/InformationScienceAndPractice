@@ -2,7 +2,7 @@
 #include <vector>
 #include <queue>
 using namespace std;
-struct EdgeNode //µ¥Á´±í½Úµã
+struct EdgeNode //å•é“¾è¡¨èŠ‚ç‚¹
 {
     int tgtIdx;
     EdgeNode* link;
@@ -25,28 +25,28 @@ GraphInAdjList* createGraph(int NumOfVer)
 };
 bool checkTopoOrder(int* topoArray, GraphInAdjList* graph)
 {
-    //ÕâÀïÉêÇëÁËÒ»¸öÊı×éµÄÄÚ´æ×÷Îª¼ì²é¹ı³ÌÁÙÊ±Ê¹ÓÃ£¬Òò´Ë±ØĞëÔÚº¯Êı·µ»ØÖ®Ç°freeµô£¬
-    //·ñÔò»áÓĞÄÚ´æĞ¹Â©¡£Îª´ËÎÒÃÇĞèÒªÔÚËùÓĞ¿ÉÄÜµÄ·µ»ØÂ·¾¶ÉÏÍË³ö¡£
+    //è¿™é‡Œç”³è¯·äº†ä¸€ä¸ªæ•°ç»„çš„å†…å­˜ä½œä¸ºæ£€æŸ¥è¿‡ç¨‹ä¸´æ—¶ä½¿ç”¨ï¼Œå› æ­¤å¿…é¡»åœ¨å‡½æ•°è¿”å›ä¹‹å‰freeæ‰ï¼Œ
+    //å¦åˆ™ä¼šæœ‰å†…å­˜æ³„æ¼ã€‚ä¸ºæ­¤æˆ‘ä»¬éœ€è¦åœ¨æ‰€æœ‰å¯èƒ½çš„è¿”å›è·¯å¾„ä¸Šé€€å‡ºã€‚
     int* topoOrder = (int*)malloc(sizeof(int) * graph->NumOfVertex);
 
-    //ÕâÀïµÄÍ»ÆÆorderÊµ¼ÊÉÏ¼ÇÂ¼ÁË¶¥µãiÅÅÔÚµÚtopoOrder[i]¸öÎ»ÖÃÉÏ¡£
+    //è¿™é‡Œçš„çªç ´orderå®é™…ä¸Šè®°å½•äº†é¡¶ç‚¹iæ’åœ¨ç¬¬topoOrder[i]ä¸ªä½ç½®ä¸Šã€‚
     for (int i = 0; i < graph->NumOfVertex; i++)
         topoOrder[topoArray[i]] = i;
-    for (int v = 0; v < graph->NumOfVertex; v++) //±éÀúËùÓĞ¶¥µã
+    for (int v = 0; v < graph->NumOfVertex; v++) //éå†æ‰€æœ‰é¡¶ç‚¹
     {
-        int topoOrderOfV = topoOrder[v];    //¶¥µãvµÄÅÅÁĞÎ»ÖÃ¡£
-        //±éÀúvµÄËùÓĞ³ö±ß
+        int topoOrderOfV = topoOrder[v];    //é¡¶ç‚¹vçš„æ’åˆ—ä½ç½®ã€‚
+        //éå†vçš„æ‰€æœ‰å‡ºè¾¹
         for (EdgeNode* cur = graph->adjLists[v]; cur != NULL; cur = cur->link)
         {
-            int topoOrderOfTgt = topoOrder[cur->tgtIdx]; //Ä¿±ê¶¥µãµÄÅÅÁĞÎ»ÖÃ
+            int topoOrderOfTgt = topoOrder[cur->tgtIdx]; //ç›®æ ‡é¡¶ç‚¹çš„æ’åˆ—ä½ç½®
             if (topoOrderOfTgt < topoOrderOfV)
-            {    //Èç¹ûÄ¿±ê¶¥µãµÄÅÅÁĞÎ»ÖÃĞ¡ÓÚvµÄÅÅÁĞÎ»ÖÃ,Ôò²»Âú×ãÒªÇó¡£
-                free(topoOrder);        //·µ»ØÇ°ÊÇ·ñÄÚ´æ£¬·ñÔò»áÓĞÄÚ´æĞ¹Â©
+            {    //å¦‚æœç›®æ ‡é¡¶ç‚¹çš„æ’åˆ—ä½ç½®å°äºvçš„æ’åˆ—ä½ç½®,åˆ™ä¸æ»¡è¶³è¦æ±‚ã€‚
+                free(topoOrder);        //è¿”å›å‰æ˜¯å¦å†…å­˜ï¼Œå¦åˆ™ä¼šæœ‰å†…å­˜æ³„æ¼
                 return false;
             }
         }
     }
-    free(topoOrder);    //·µ»ØÇ°ÊÍ·ÅÄÚ´æ£¬·ñÔò»áÓĞÄÚ´æĞ¹Â©
+    free(topoOrder);    //è¿”å›å‰é‡Šæ”¾å†…å­˜ï¼Œå¦åˆ™ä¼šæœ‰å†…å­˜æ³„æ¼
     cout << "YES";
     return true;
 }
